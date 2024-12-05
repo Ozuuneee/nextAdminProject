@@ -10,7 +10,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useState } from "react";
 
-export const UserCreateDialog = ({ open, setCreateModalOpen }) => {
+export const UserCreateDialog = ({ open, onClose }) => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
@@ -25,10 +25,10 @@ export const UserCreateDialog = ({ open, setCreateModalOpen }) => {
         imageUrl: "https://dummyimage.com/117x116.png/cc0000/ffffff",
       }),
     });
-    setCreateModalOpen(false);
+    onClose(false);
   };
   return (
-    <Dialog open={open} onOpenChange={setCreateModalOpen}>
+    <Dialog open={open} onOpenChange={onClose}>
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
           <DialogTitle>Create user</DialogTitle>
@@ -76,7 +76,9 @@ export const UserCreateDialog = ({ open, setCreateModalOpen }) => {
           >
             Cancel
           </Button>
-          <Button type="submit">Save</Button>
+          <Button type="submit" onClick={() => sendForm()}>
+            Save
+          </Button>
         </DialogFooter>
       </DialogContent>
     </Dialog>

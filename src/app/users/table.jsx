@@ -45,7 +45,7 @@ export function UsersTable(props) {
             </TableRow>
           </TableHeader>
           <TableBody>
-            {data?.slice(0, 10).map((item, index) => (
+            {data?.map((item, index) => (
               <TableRow key={item.id}>
                 <TableCell>{index + 1}</TableCell>
                 <TableHead>
@@ -75,10 +75,23 @@ export function UsersTable(props) {
                         Copy Email
                       </DropdownMenuItem>
                       <DropdownMenuSeparator />
-                      <DropdownMenuItem>Edit</DropdownMenuItem>
                       <DropdownMenuItem
                         onClick={async () => {
-                          await fetch(`api/users/${item.id}`, {
+                          await fetch(
+                            `api/users/${item.firstname}, 
+                            ${item.lastname}, 
+                            ${item.email}`,
+                            {
+                              method: "POST",
+                            }
+                          );
+                        }}
+                      >
+                        Edit
+                      </DropdownMenuItem>
+                      <DropdownMenuItem
+                        onClick={() => {
+                          fetch(`api/users/${item.id}`, {
                             method: "DELETE",
                           });
                         }}
